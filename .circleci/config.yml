@@ -1,0 +1,59 @@
+version:2.1
+
+# run
+jobs:
+  lint:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Install linting tool"
+          command: echo "installation successful"
+      - run:
+          name: "Run linting on the root directory"
+          command: echo "linting Successful"
+          working_directory: "./"
+  test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Run unit tests"
+          command: echo "unit test passed"
+      - run:
+          name: "Eun integration tests"
+          command: echo "integration tests passed"
+  build:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Build docker image"
+          command: echo "image sucessfully built"
+      - run:
+          name: "Publish image"
+          command: echo "image successfully published"
+  deploy:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Deploy image using----"
+          command: echo "image succesfully deployed"
+workflows:
+  test-and-deploy:
+    jobs:
+      - lint
+      - test:
+          requires:
+            - lint
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
