@@ -1,29 +1,20 @@
 version:2.1
-# run
+orbs:
+  nikita:nikita/demo@1.0.0
+
 jobs:
   lint:
     docker:
       - image: alpine:latest
     steps:
       - checkout
-      - run:
-          name: "Install linting tool"
-          command: echo "installation successful"
-      - run:
-          name: "Run linting on the root directory"
-          command: echo "linting Successful"
-          working_directory: "./"
+      - nikita/lint
   test:
     docker:
       - image: alpine:latest
     steps:
       - checkout
-      - run:
-          name: "Run unit tests"
-          command: echo "unit test passed"
-      - run:
-          name: "Eun integration tests"
-          command: echo "integration tests passed"
+      - nikita/test
   build:
     docker:
       - image: alpine:latest
