@@ -1,28 +1,49 @@
-version: 2.1
+version:2.1
 orbs:
-  nikita: nikita/demotest@1.0.0
+  nikita:nikita/demo@1.0.0
+
 jobs:
-  scanjob:
+  lint:
     docker:
-      - image: "cimg/base:stable"
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: alpine:latest
     steps:
       - checkout
-      - nikita/demotest: # invoke command "sayhello"
-          to: "Lev"
-commands:
-  scan:
-    description: "A very simple command for demonstration purposes"
-    parameters:
-      to:
-        type: string
-        default: "World"
+      - nikita/lint
+  test:
+    docker:
+      - image: alpine:latest
     steps:
-      - nikita/demotest:  << parameters.to >>
-
+      - checkout
+      - nikita/test
+  build:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Build docker image"
+          command: echo "image sucessfully built"
+      - run:
+          name: "Publish image"
+          command: echo "image successfully published"
+  deploy:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: "Deploy image using----"
+          command: echo "image succesfully deployed"
 workflows:
-  nikita/sayhello:
+  test-and-deploy:
     jobs:
-      - scanjob
+      - lint
+      - test:
+          requires:
+            - lint
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
