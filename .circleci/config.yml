@@ -20,7 +20,7 @@ commands:
         type: string
         default: "World"
     steps:
-      - nikita/demotest: echo Hello << parameters.to >>
+      - nikita/demotest:  << parameters.to >>
 
 
 workflows:
