@@ -13,7 +13,7 @@ jobs:
       - nikita/demotest: # invoke command "sayhello"
           to: "Lev"
 commands:
-  sayhello:
+  scan:
     description: "A very simple command for demonstration purposes"
     parameters:
       to:
