@@ -1,7 +1,6 @@
-version:2.1
+version: 2.1
 orbs:
-  nikita:nikita/demo@1.0.0
-
+ nikita:nikita/demo@1.0.0
 jobs:
   lint:
     docker:
