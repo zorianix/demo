@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   nikita: nikita/demotest@1.0.0
 jobs:
-  myjob:
+  scanjob:
     docker:
       - image: "cimg/base:stable"
         auth:
@@ -26,6 +26,6 @@ commands:
 workflows:
   nikita/sayhello:
     jobs:
-      - myjob
+      - scanjob
 
 
