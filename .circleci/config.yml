@@ -27,5 +27,3 @@ workflows:
   nikita/sayhello:
     jobs:
       - scanjob
-
-
