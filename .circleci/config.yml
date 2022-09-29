@@ -22,7 +22,6 @@ commands:
     steps:
       - nikita/demotest:  << parameters.to >>
 
-
 workflows:
   nikita/sayhello:
     jobs:
